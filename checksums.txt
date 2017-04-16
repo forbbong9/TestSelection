@@ -1,0 +1,1 @@
+{Main.class=5e836bdef96d76843d2b5886631a3978, Stuff.class=91a6b17a5687f664ba90f100cac7a793, StuffTest.class=ad0df94cb0f5e8bb609bdc35e64e7c33, Stuff2Test.class=f26f811438f7d2ad9f062d8e3baa8688}
