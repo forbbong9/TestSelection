@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
+import utils.PackageHandler;
+
 
 /**
  * Created by HL on 4/11/17.
@@ -11,23 +13,33 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
 
-//        String path = "/Users/HL/Desktop/commons-dbutils-trunk";
-        String path = "/Users/HL/Documents/CoffeeMaker/java-agent-asm-javassist-sample/other";
+        String rootPath = "C:/Users/Cheng/git/commons-dbutils";
+        String packageName = "org.apache.commons.dbutils";
+        PackageHandler.initialize(rootPath, packageName);
+        
+        // See: http://stackoverflow.com/questions/8496494/running-command-line-in-java 
+        // For Process execution tips
+        Runtime rt = Runtime.getRuntime();
+        Process pr = rt.exec("jdeps -verbose:class -filter:archive " + PackageHandler.getPackagePath());
+        BufferedReader jDepsReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        String tmp = null;
+        while ((tmp = jDepsReader.readLine()) != null) {
+        	System.out.println(tmp);
+        }
 
-        HashMap<String, String> oldMap = new HashMap<>();
-        HashMap<String, String> newMap = new HashMap<>();
-        ArrayList<String> dangerousClass = new ArrayList<>();
-        ArrayList<File> files = new ArrayList<>();
-
-        Main main = new Main();
-        main.readChecksums(oldMap);
-        main.updateChecksums(path, files, oldMap, newMap, dangerousClass);
-        main.writeChecksums(newMap);
-//        System.out.println(files.toString());
-        FileOutputStream fos = new FileOutputStream(new File("classes.txt"));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-        bw.write(files.toString());
-        bw.close();
+//        HashMap<String, String> oldMap = new HashMap<>();
+//        HashMap<String, String> newMap = new HashMap<>();
+//        ArrayList<String> dangerousClass = new ArrayList<>();
+//        ArrayList<File> files = new ArrayList<>();
+//
+//        Main main = new Main();
+//        main.readChecksums(oldMap);
+//        main.updateChecksums(path, files, oldMap, newMap, dangerousClass);
+//        main.writeChecksums(newMap);
+//        FileOutputStream fos = new FileOutputStream(new File("classes.txt"));
+//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+//        bw.write(files.toString());
+//        bw.close();
     }
 
     public void updateChecksums(String directoryName, ArrayList<File> files, HashMap<String, String> oldMap, HashMap<String, String> newMap, ArrayList<String> dangerousClass) throws NoSuchAlgorithmException, IOException {
