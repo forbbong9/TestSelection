@@ -16,8 +16,6 @@ import utils.PackageHandler;
  */
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
-        long start = System.nanoTime();
-
         String rootPath = "/Users/HL/Desktop/commons-dbutils-trunk"; //"C:/Users/Cheng/git/commons-dbutils";
         String classPackageName = "org.apache.commons.dbutils";
         String testPackageName = "org.apache.commons.dbutils";
@@ -26,6 +24,10 @@ public class Main {
 //        classPackageName = "org.joda.time";
 //        testPackageName = "org.joda.time";
 
+        // Start Execution Timer
+        long start = System.nanoTime();
+        
+        // Compute Class and Test Dependency Trees
         PackageHandler.initialize(rootPath, classPackageName, testPackageName);
         ClassNode.InitClassTree();
         TestNode.InitTestTree();
@@ -33,16 +35,20 @@ public class Main {
 //        for(ClassNode node : ClassNode.instances.values()){
 //            System.out.println(node.toString());
 //        }
+//        for(TestNode node : TestNode.instances.values()){
+//            System.out.println(node.toString());
+//        }
 
+        // Compute checksums and  dangerous classes
         CheckSumHandler.doChecksum(PackageHandler.getClassPath());
-        List<String> dangerousClasses = CheckSumHandler.getDangerousClasses();
-        for(String dangerousClass: dangerousClasses){
-//            System.out.println(dangerousClass);
+        for(String dangerousClass: CheckSumHandler.getDangerousClasses()){
             ClassNode.instances.get(dangerousClass).setNeedToRetest(true);
         }
         for(TestNode instance: TestNode.instances.values()){
             instance.checkIfNeedRetest();
         }
+        
+        // Construct Regression Test String
         StringBuilder builder = new StringBuilder();
         builder.append("mvn test -DfailIfNoTests=false -Dtest=");
         for(TestNode instance: TestNode.instances.values()){
@@ -50,10 +56,12 @@ public class Main {
                 builder.append(instance.getClassName() + ",");
             }
         }
-
-        builder.deleteCharAt(builder.length()-1);
+        builder.deleteCharAt(builder.length() - 1);
+        
+        // Print Regression Test String
         System.out.println(builder.toString());
 
+        // Print Exection Time
         long duration = System.nanoTime() - start;
         double seconds = (double)duration / 1000000000.0;
         System.out.println("\nRegression test selection time: " + seconds + "seconds.");
