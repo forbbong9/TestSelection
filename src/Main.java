@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import dependencyTrees.ClassNode;
+import dependencyTrees.TestNode;
 import utils.PackageHandler;
 
 
@@ -20,10 +21,7 @@ public class Main {
         
         PackageHandler.initialize(rootPath, packageName);
         ClassNode.InitClassTree();
-        
-        for (ClassNode node : ClassNode.instances.values()) {
-        	System.out.println(node.toString());
-        }
+        TestNode.InitTestTree();
         
 //        HashMap<String, String> oldMap = new HashMap<>();
 //        HashMap<String, String> newMap = new HashMap<>();
