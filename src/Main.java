@@ -3,7 +3,9 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.stream.Stream;
 
+import dependencyTrees.ClassNode;
 import utils.PackageHandler;
 
 
@@ -15,18 +17,14 @@ public class Main {
 
         String rootPath = "C:/Users/Cheng/git/commons-dbutils";
         String packageName = "org.apache.commons.dbutils";
-        PackageHandler.initialize(rootPath, packageName);
         
-        // See: http://stackoverflow.com/questions/8496494/running-command-line-in-java 
-        // For Process execution tips
-        Runtime rt = Runtime.getRuntime();
-        Process pr = rt.exec("jdeps -verbose:class -filter:archive " + PackageHandler.getPackagePath());
-        BufferedReader jDepsReader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-        String tmp = null;
-        while ((tmp = jDepsReader.readLine()) != null) {
-        	System.out.println(tmp);
+        PackageHandler.initialize(rootPath, packageName);
+        ClassNode.InitClassTree();
+        
+        for (ClassNode node : ClassNode.instances.values()) {
+        	System.out.println(node.toString());
         }
-
+        
 //        HashMap<String, String> oldMap = new HashMap<>();
 //        HashMap<String, String> newMap = new HashMap<>();
 //        ArrayList<String> dangerousClass = new ArrayList<>();
