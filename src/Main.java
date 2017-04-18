@@ -18,13 +18,15 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
         long start = System.nanoTime();
 
-        String rootPath = "C:/Users/Cheng/git/commons-dbutils";
-        rootPath = "/Users/HL/Desktop/commons-dbutils-trunk";
-        String packageName = "org.apache.commons.dbutils";
+        String rootPath = "/Users/HL/Desktop/commons-dbutils-trunk"; //"C:/Users/Cheng/git/commons-dbutils";
+        String classPackageName = "org.apache.commons.dbutils";
+        String testPackageName = "org.apache.commons.dbutils";
+        
 //        rootPath = "/Users/HL/Desktop/joda-time-master";
-//        packageName = "org.joda.time";
+//        classPackageName = "org.joda.time";
+//        testPackageName = "org.joda.time";
 
-        PackageHandler.initialize(rootPath, packageName);
+        PackageHandler.initialize(rootPath, classPackageName, testPackageName);
         ClassNode.InitClassTree();
         TestNode.InitTestTree();
 

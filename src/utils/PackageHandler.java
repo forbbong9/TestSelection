@@ -3,15 +3,17 @@ package utils;
 // Could be a singleton
 public class PackageHandler {
 	private static String rootPath;     // Path to root of project
-	private static String testPath;     // Path to test .class files
 	private static String classPath;    // Path to source .class files
-	private static String packageName;  // Name of class, period delimited
+	private static String testPath;     // Path to test .class files
+	private static String classPackageName;  // Name of class package, period delimited
+	private static String testPackageName;  // Name of test package, period delimited
 
-	public static void initialize(String _rootPath, String _packageName) {
+	public static void initialize(String _rootPath, String _classPackageName, String _testPackageName) {
 		rootPath = _rootPath.trim();
-		testPath = rootPath + "/target/test-classes/" + _packageName.trim().replace(".", "/");
-		classPath = rootPath + "/target/classes/" + _packageName.trim().replace(".", "/");
-		packageName = _packageName.trim();
+		classPackageName = _classPackageName.trim();
+		testPackageName = _testPackageName.trim();
+		classPath = rootPath + "/target/classes/" + classPackageName.replace(".", "/");
+		testPath = rootPath + "/target/test-classes/" + testPackageName.replace(".", "/");
 	}
 	
 	public static String getRootPath() {
@@ -23,7 +25,10 @@ public class PackageHandler {
 	public static String getClassPath() {
 		return classPath;
 	}
-	public static String getPackageName() {
-		return packageName;
+	public static String getClassPackageName() {
+		return classPackageName;
+	}
+	public static String getTestPackageName() {
+		return testPackageName;
 	}
 }

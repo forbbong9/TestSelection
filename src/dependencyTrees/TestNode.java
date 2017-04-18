@@ -40,7 +40,7 @@ public class TestNode {
         	jDepsLine = jDepsLine.trim();
         	
         	// Determine if a new testNode is being referenced
-        	if (jDepsLine.startsWith(PackageHandler.getPackageName())) {
+        	if (jDepsLine.startsWith(PackageHandler.getTestPackageName())) {
         		if (!jDepsLine.contains("$")) {
             		String[] fullClassName = jDepsLine.split("\\.");
             		String className = fullClassName[fullClassName.length - 1].split("\\s+")[0];
@@ -54,7 +54,7 @@ public class TestNode {
         	else if (null != testNode) {
         		// TODO: Refactor to rename fullClassName separate from above. Extract Method.
         		String fullClassNameStr = jDepsLine.split("\\s+")[1];
-        		if (fullClassNameStr.startsWith(PackageHandler.getPackageName()) && !fullClassNameStr.contains("$")) {
+        		if (fullClassNameStr.startsWith(PackageHandler.getTestPackageName()) && !fullClassNameStr.contains("$")) {
             		String[] fullClassName = fullClassNameStr.split("\\.");
             		String dependencyName = fullClassName[fullClassName.length - 1].split("\\s+")[0];
             		
