@@ -103,7 +103,17 @@ public class TestNode {
 	public void addParent(TestNode parent) {
 		this.parents.add(parent);
 	}
-	
+
+	public void checkIfNeedRetest(){
+		for(ClassNode dependency : dependencies){
+			if(dependency.isNeedToRetest()){
+				//retest
+				setNeedToRetest(true);
+			}
+		}
+	}
+
+
 	@Override
 	public String toString() {
 		String desc = className + "\n: parents - ";
