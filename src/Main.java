@@ -21,12 +21,18 @@ public class Main {
         String rootPath = "C:/Users/Cheng/git/commons-dbutils";
         rootPath = "/Users/HL/Desktop/commons-dbutils-trunk";
         String packageName = "org.apache.commons.dbutils";
-        
+//        rootPath = "/Users/HL/Desktop/joda-time-master";
+//        packageName = "org.joda.time";
+
         PackageHandler.initialize(rootPath, packageName);
         ClassNode.InitClassTree();
         TestNode.InitTestTree();
 
-        CheckSumHandler.doChecksum(PackageHandler.getRootPath());
+//        for(ClassNode node : ClassNode.instances.values()){
+//            System.out.println(node.toString());
+//        }
+
+        CheckSumHandler.doChecksum(PackageHandler.getClassPath());
         List<String> dangerousClasses = CheckSumHandler.getDangerousClasses();
         for(String dangerousClass: dangerousClasses){
 //            System.out.println(dangerousClass);

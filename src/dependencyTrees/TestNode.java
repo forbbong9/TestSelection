@@ -144,9 +144,9 @@ public class TestNode {
 		if (!this.needToRetest && needToRetest) 
 		{ 
 			this.needToRetest = true;
-			for (TestNode parent : parents) {
-				parent.setNeedToRetest(true);
-			}
+//			for (TestNode parent : parents) {
+//				parent.setNeedToRetest(true);
+//			}
 		}
 	}
 }

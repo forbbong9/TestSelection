@@ -19,6 +19,7 @@ public class CheckSumHandler {
     private static HashSet<String> dangerousClass = new HashSet<>();
 
     public static void doChecksum(String directoryName) throws IOException, NoSuchAlgorithmException {
+
         readChecksums();
         updateChecksums(directoryName);
         writeChecksums();
@@ -54,6 +55,7 @@ public class CheckSumHandler {
                     if(!(oldMap.containsKey(fileName) && oldMap.get(fileName).equals(sb.toString()))){
                         // When not contains this class or checksum changed, include the class
                         int index = fileName.indexOf("$");
+                        System.out.println(fileName + " old: " + oldMap.get(fileName) + " new: " + sb.toString());
                         String className = fileName.substring(0, index == -1? fileName.indexOf(".") : index );
                         dangerousClass.add(className);
                     }
