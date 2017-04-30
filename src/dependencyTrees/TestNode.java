@@ -108,12 +108,10 @@ public class TestNode {
 	public void checkIfNeedRetest(){
 		for(ClassNode dependency : dependencies){
 			if(dependency.isNeedToRetest()){
-				//retest
-				setNeedToRetest(true);
+				this.needToRetest = true;
 			}
 		}
 	}
-
 
 	@Override
 	public String toString() {
@@ -145,9 +143,9 @@ public class TestNode {
 		if (!this.needToRetest && needToRetest) 
 		{ 
 			this.needToRetest = true;
-//			for (TestNode parent : parents) {
-//				parent.setNeedToRetest(true);
-//			}
+			for (TestNode parent : parents) {
+				parent.setNeedToRetest(true);
+			}
 		}
 	}
 }

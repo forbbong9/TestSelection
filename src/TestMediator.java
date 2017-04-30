@@ -41,6 +41,11 @@ public class TestMediator {
 		TestNode.InitTestTree();
 
 		// Compute checksums and dangerous classes
+//      // TODO: Add checking for testfile changes
+//		CheckSumHandler.doChecksum(PackageHandler.getTestPath());
+//		for (String dangerousTest : CheckSumHandler.getDangerousClasses()) {
+//			TestNode.instances.get(dangerousTest).setNeedToRetest(true);
+//		}
 		CheckSumHandler.doChecksum(PackageHandler.getClassPath());
 		for (String dangerousClass : CheckSumHandler.getDangerousClasses()) {
 			ClassNode.instances.get(dangerousClass).setNeedToRetest(true);
