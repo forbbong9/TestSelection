@@ -6,8 +6,13 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.surefire.AbstractSurefireMojo;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.surefire.suite.RunResult;
 
+/**
+ * @goal rts
+ */
+@Mojo(name = "TestSelection")
 public class RegressionSurefireMojo extends AbstractSurefireMojo {
 
 	@Override
