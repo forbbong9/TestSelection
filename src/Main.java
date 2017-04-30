@@ -10,48 +10,24 @@ import utils.PackageHandler;
 
 /**
  * Created by HL on 4/11/17.
+ * 
+ * Desc: 
+ * This class is included for manual execution of the project. It is not used when the project is ran
+ * as a surefire plugin.
  */
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
-        String rootPath = "C:/Users/Cheng/git/commons-dbutils";
-        String classPackageName = "org.apache.commons.dbutils";
-        String testPackageName = "org.apache.commons.dbutils";
-        
-//        rootPath = "/Users/HL/Desktop/joda-time-master";
-//        classPackageName = "org.joda.time";
-//        testPackageName = "org.joda.time";
-
         // Start Execution Timer
         long start = System.nanoTime();
         
-        // Compute Class and Test Dependency Trees
-        PackageHandler.initialize(rootPath, classPackageName, testPackageName);
-        ClassNode.InitClassTree();
-        TestNode.InitTestTree();
-
-//        for(ClassNode node : ClassNode.instances.values()){
-//            System.out.println(node.toString());
-//        }
-//        for(TestNode node : TestNode.instances.values()){
-//            System.out.println(node.toString());
-//        }
-
-        // Compute checksums and  dangerous classes
-        CheckSumHandler.doChecksum(PackageHandler.getClassPath());
-        for(String dangerousClass: CheckSumHandler.getDangerousClasses()){
-            ClassNode.instances.get(dangerousClass).setNeedToRetest(true);
-        }
-        for(TestNode instance: TestNode.instances.values()){
-            instance.checkIfNeedRetest();
-        }
+        // Init Dependency Trees
+        TestMediator.initDependencyTrees();
         
         // Construct Regression Test String
         StringBuilder builder = new StringBuilder();
         builder.append("mvn test -DfailIfNoTests=false -Dtest=");
-        for(TestNode instance: TestNode.instances.values()){
-            if(instance.isNeedToRetest()){
-                builder.append(instance.getClassName() + ",");
-            }
+        for(String selectedTest: TestMediator.getSelectedTests()){
+            builder.append(selectedTest + ",");
         }
         builder.deleteCharAt(builder.length() - 1);
         

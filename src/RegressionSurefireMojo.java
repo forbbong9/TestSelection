@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -10,7 +12,16 @@ public class RegressionSurefireMojo extends AbstractSurefireMojo {
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		super.execute();
+
+        try {
+			TestMediator.initDependencyTrees();
+		 	setExcludes(TestMediator.getExcludedTests());
+			super.execute();
+			
+		} catch (NoSuchAlgorithmException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
