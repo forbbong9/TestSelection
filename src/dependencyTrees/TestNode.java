@@ -37,6 +37,7 @@ public class TestNode {
         String jDepsLine = null;
         TestNode testNode = null;
         while ((jDepsLine = jDepsReader.readLine()) != null) {
+        	System.out.println(jDepsLine);
         	jDepsLine = jDepsLine.trim();
         	
         	// Determine if a new testNode is being referenced

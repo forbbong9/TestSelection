@@ -1,9 +1,5 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import java.util.stream.Stream;
 
 import dependencyTrees.ClassNode;
 import dependencyTrees.TestNode;
@@ -16,7 +12,7 @@ import utils.PackageHandler;
  */
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
-        String rootPath = "/Users/HL/Desktop/commons-dbutils-trunk"; //"C:/Users/Cheng/git/commons-dbutils";
+        String rootPath = "C:/Users/Cheng/git/commons-dbutils";
         String classPackageName = "org.apache.commons.dbutils";
         String testPackageName = "org.apache.commons.dbutils";
         
