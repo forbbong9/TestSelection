@@ -36,9 +36,9 @@ Add our plugin in your target project pom.xml.
 ```
 Run our plugin on your target project after making any change.
 ```
-mvn clean
-mvn test-compile
-mvn TestSelection:TestSelection
+$ mvn clean
+$ mvn test-compile
+$ mvn TestSelection:TestSelection
 ```
 
 ## Example
@@ -48,7 +48,7 @@ https://github.com/apache/commons-dbutils
 
 1e4b780
 
-#### Result of our toll
+#### Result of our tool
 First run on our tool: 
 >Tests run: 300, Failures: 0, Errors: 0, Skipped: 0, Total time: 5.046 s
 
