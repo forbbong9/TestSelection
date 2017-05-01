@@ -108,6 +108,11 @@ public class TestNode {
 		for(ClassNode dependency : dependencies){
 			if(dependency.isNeedToRetest()){
 				this.needToRetest = true;
+				
+				// Use below to percolate class dependency 
+				// changes up to parent test classes
+				
+				//this.setNeedToRetest(true);
 			}
 		}
 	}
