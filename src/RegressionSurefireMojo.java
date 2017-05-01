@@ -23,21 +23,13 @@ import utils.TestMediator;
 @Mojo(name = "TestSelection", defaultPhase = LifecyclePhase.TEST, threadSafe = true, requiresDependencyResolution = ResolutionScope.TEST)
 public class RegressionSurefireMojo extends AbstractSurefireMojo implements SurefireReportParameters {
 
-    /**
-     * @parameter property="args"
-     * @required
-     */
+    @Parameter (property = "args")
     private String[] args;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 
 		System.out.println("\n\nStarting RTSZ");
-
-        if (null == args) {
-            System.out.println("fsdasdfasdfasdfasdf");
-        }
-        System.out.println(args.length);
         try {
 
             TestMediator.setParameters( args );
