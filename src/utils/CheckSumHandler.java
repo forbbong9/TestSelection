@@ -68,6 +68,9 @@ public class CheckSumHandler {
     public static void readChecksums() throws IOException {
         //Read file and generate HashMap
         File checksumFile = new File("checksums.txt");
+        if(!checksumFile.exists()){
+            checksumFile.createNewFile();
+        }
         String targetFileStr = Files.readAllLines(checksumFile.toPath()).toString();
 
         targetFileStr = targetFileStr.replaceAll("\\{", "").replaceAll("\\}", "").replaceAll("\\[","").replaceAll("\\]","");

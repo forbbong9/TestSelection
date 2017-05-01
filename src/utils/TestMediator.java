@@ -9,9 +9,9 @@ import dependencyTrees.TestNode;
 
 // TODO: Singleton? Anti-Pattern?
 public class TestMediator {
-    public static String rootPath = "C:/Users/Cheng/git/commons-dbutils"; //"/Users/HL/Desktop/joda-time-master";
-    public static String classPackageName = "org.apache.commons.dbutils";
-    public static String testPackageName = "org.apache.commons.dbutils";
+    public static String rootPath;
+    public static String classPackageName;
+    public static String testPackageName;
     
 	public static List<String> getSelectedTests() throws IOException, NoSuchAlgorithmException {
 		List<String> selectedTests = new ArrayList<String>();
@@ -64,5 +64,11 @@ public class TestMediator {
 		for (TestNode node : TestNode.instances.values()) {
 			System.out.println(node.toString());
 		}
+	}
+
+	public static void setParameters(String[] args){
+		rootPath = args[0];
+		classPackageName = args[1];
+		testPackageName = args[2];
 	}
 }
