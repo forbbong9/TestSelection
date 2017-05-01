@@ -10,12 +10,13 @@ import java.util.List;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.surefire.AbstractSurefireMojo;
-import org.apache.maven.plugin.surefire.SurefireReportParameters;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.surefire.suite.RunResult;
+
+import org.apache.maven.plugin.surefire.SurefireReportParameters;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 import utils.TestMediator;
 
@@ -33,7 +34,7 @@ public class RegressionSurefireMojo extends AbstractSurefireMojo implements Sure
 
             TestMediator.setParameters( args );
 			TestMediator.initDependencyTrees();
-			setPluginArtifactMap(getProject().getPluginArtifactMap());
+			//setPluginArtifactMap(getProject().getPluginArtifactMap());
 		 	setExcludes(TestMediator.getExcludedTests());
 			super.execute();
 			
