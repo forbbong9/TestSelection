@@ -1,3 +1,4 @@
+package utils;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -5,8 +6,6 @@ import java.util.List;
 
 import dependencyTrees.ClassNode;
 import dependencyTrees.TestNode;
-import utils.CheckSumHandler;
-import utils.PackageHandler;
 
 // TODO: Singleton? Anti-Pattern?
 public class TestMediator {

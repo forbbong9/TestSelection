@@ -6,6 +6,7 @@ import dependencyTrees.ClassNode;
 import dependencyTrees.TestNode;
 import utils.CheckSumHandler;
 import utils.PackageHandler;
+import utils.TestMediator;
 
 
 /**
