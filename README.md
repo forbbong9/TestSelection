@@ -42,6 +42,30 @@ mvn TestSelection:TestSelection
 ```
 
 ## Example
+#### Target project URL and SHA
 
+https://github.com/apache/commons-dbutils
+
+1e4b780
+
+#### Result of our toll
+First run on our tool: 
+>Tests run: 300, Failures: 0, Errors: 0, Skipped: 0, Total time: 5.046 s
+
+Make some change in AsyncQueryRunner.Java
+
+Second run:
+>Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Total time: 4.003 s
+
+#### Comparing with Ekstazi
+Ekastazi is a Dynamic Regression Test Selection Tool
+
+First run on Ekastazi:
+>Tests run: 300, Failures: 0, Errors: 0, Skipped: 0, Total time: 10.521 s
+
+Make the same change in AsyncQueryRunner.Java
+
+Second run:
+>Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Total time: 8.714 s
 
 
