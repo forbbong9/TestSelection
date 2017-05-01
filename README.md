@@ -2,7 +2,7 @@
 Our RTS Maven plugin integrate with Maven Surefire plugin, perform a static regression test selection on class level.
 
 ## Configuration
-Download our project to your local storage. Then install it locally.
+Download our project to your local storage. Then install it locally by running below in the project root directory.
 ```
 $ mvn clean install
 ```
@@ -47,6 +47,35 @@ $ mvn TestSelection:TestSelection
 https://github.com/apache/commons-dbutils
 
 1e4b780
+
+
+#### Modification to pom.xml
+```
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      ...
+      <plugin>
+          <groupId>TestSelection</groupId>
+          <artifactId>TestSelection</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <configuration>
+              <excludes>
+                <exclude>**/BaseTestCase.java</exclude>
+              </excludes>
+              <args>
+                  <param>C:/Users/Cheng/git/commons-dbutils</param>
+                  <param>org.apache.commons.dbutils</param>
+                  <param>org.apache.commons.dbutils</param>
+              </args>
+          </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
 
 #### Result of our tool
 First run on our tool: 
