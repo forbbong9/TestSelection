@@ -10,6 +10,10 @@ import dependencyTrees.TestNode;
 
 // TODO: Singleton? Anti-Pattern?
 public class TestMediator {
+	
+	public static final String TEST_CHECKSUM_FILE = "testChecksum.txt";
+	public static final String CLASS_CHECKSUM_FILE = "classChecksum.txt";
+	
     public static String rootPath;
     public static String classPackageName;
     public static String testPackageName;
@@ -40,16 +44,21 @@ public class TestMediator {
 		ClassNode.InitClassTree();
 		TestNode.InitTestTree();
 
-		// Compute checksums and dangerous classes
-//      // TODO: Add checking for testfile changes
-//		CheckSumHandler.doChecksum(PackageHandler.getTestPath());
-//		for (String dangerousTest : CheckSumHandler.getDangerousClasses()) {
-//			TestNode.instances.get(dangerousTest).setNeedToRetest(true);
-//		}
-		CheckSumHandler.doChecksum(PackageHandler.getClassPath());
-		for (String dangerousClass : CheckSumHandler.getDangerousClasses()) {
+		// Compute Test checksums and mark associated nodes
+		CheckSumHandler testCheckSumHandler = new CheckSumHandler(TEST_CHECKSUM_FILE);
+		testCheckSumHandler.doChecksum(PackageHandler.getTestPath());
+		for (String dangerousTest : testCheckSumHandler.getDangerousClasses()) {
+			TestNode.instances.get(dangerousTest).setNeedToRetest(true);
+		}
+
+		// Compute Class checksums and mark associated nodes
+		CheckSumHandler classCheckSumHandler = new CheckSumHandler(CLASS_CHECKSUM_FILE);
+		classCheckSumHandler.doChecksum(PackageHandler.getClassPath());
+		for (String dangerousClass : classCheckSumHandler.getDangerousClasses()) {
 			ClassNode.instances.get(dangerousClass).setNeedToRetest(true);
 		}
+
+		// Mark tests which depend on a dangerous class
 		for (TestNode instance : TestNode.instances.values()) {
 			instance.checkIfNeedRetest();
 		}

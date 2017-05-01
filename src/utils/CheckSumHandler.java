@@ -14,18 +14,26 @@ import java.util.List;
  */
 public class CheckSumHandler {
 
-    private static HashMap<String, String> oldMap = new HashMap<>();
-    private static HashMap<String, String> newMap = new HashMap<>();
-    private static HashSet<String> dangerousClass = new HashSet<>();
+	private String checkSumFileName;
+    private HashMap<String, String> oldMap;
+    private HashMap<String, String> newMap;
+    private HashSet<String> dangerousClass;
 
-    public static void doChecksum(String directoryName) throws IOException, NoSuchAlgorithmException {
+    public CheckSumHandler(String checkSumFileName) {
+    	this.checkSumFileName = checkSumFileName;
+    	this.oldMap = new HashMap<>();
+    	this.newMap = new HashMap<>();
+    	this.dangerousClass = new HashSet<>();
+    }
+    
+    public void doChecksum(String directoryName) throws IOException, NoSuchAlgorithmException {
 
         readChecksums();
         updateChecksums(directoryName);
         writeChecksums();
     }
 
-    public static void updateChecksums(String directoryName) throws NoSuchAlgorithmException, IOException {
+    public void updateChecksums(String directoryName) throws NoSuchAlgorithmException, IOException {
         File directory = new File(directoryName);
 
         // get all the files from a directory
@@ -65,9 +73,9 @@ public class CheckSumHandler {
         }
     }
 
-    public static void readChecksums() throws IOException {
+    public void readChecksums() throws IOException {
         //Read file and generate HashMap
-        File checksumFile = new File("checksums.txt");
+        File checksumFile = new File(checkSumFileName);
         if(!checksumFile.exists()){
             checksumFile.createNewFile();
         }
@@ -83,14 +91,14 @@ public class CheckSumHandler {
         }
     }
 
-    public static void writeChecksums() throws IOException{
-        File file = new File("checksums.txt");
+    public void writeChecksums() throws IOException{
+        File file = new File(checkSumFileName);
         FileOutputStream fos = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
         bw.write(newMap.toString());
         bw.close();
     }
-    public static List<String> getDangerousClasses(){
+    public List<String> getDangerousClasses(){
         return new ArrayList<>(dangerousClass);
     }
 
