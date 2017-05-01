@@ -3,6 +3,7 @@ import static org.apache.maven.plugin.surefire.SurefireHelper.reportExecution;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,10 @@ public class RegressionSurefireMojo extends AbstractSurefireMojo implements Sure
             TestMediator.setParameters( args );
 			TestMediator.initDependencyTrees();
 			//setPluginArtifactMap(getProject().getPluginArtifactMap());
-		 	setExcludes(TestMediator.getExcludedTests());
+			
+			List<String> excludedTests = TestMediator.getExcludedTests();
+			excludedTests.addAll(getExcludes());
+		 	setExcludes(excludedTests);
 			super.execute();
 			
 		} catch (NoSuchAlgorithmException | IOException e) {
