@@ -40,6 +40,11 @@ $ mvn clean
 $ mvn test-compile
 $ mvn TestSelection:TestSelection
 ```
+After the first run, the mvn clean is unnecessary. Simply run the following after making code changes.
+```
+$ mvn test-compile
+$ mvn TestSelection:TestSelection
+```
 
 ## Example
 #### Target project URL and SHA
