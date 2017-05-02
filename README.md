@@ -2,7 +2,7 @@
 Our RTS Maven plugin integrate with Maven Surefire plugin, perform a static regression test selection on class level.
 
 ## Keywords
-`SurefirePlugin`, `AbstractSurefireMojo`, `Static Regression Test Selection`, `Maven`, `RTS`, `Skip Maven Unit Test`
+`SurefirePlugin`, `AbstractSurefireMojo`, `Static Regression Test Selection`, `Maven`, `mvn`, `Skip Maven Unit Test`
 
 ## Configuration
 Download our project to your local storage. Then install it locally by running below in the project root directory.
