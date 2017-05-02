@@ -74,7 +74,7 @@ https://github.com/apache/commons-dbutils
                 <exclude>**/BaseTestCase.java</exclude>
               </excludes>
               <args>
-                  <param>C:/Users/Cheng/git/commons-dbutils</param> <!-- Replace with your absolute path to commons-dbutils -->
+                  <param>C:/Users/Cheng/git/commons-dbutils</param> <!-- Replace! -->
                   <param>org.apache.commons.dbutils</param>
                   <param>org.apache.commons.dbutils</param>
               </args>
