@@ -29,8 +29,11 @@ public class RegressionSurefireMojo extends SurefirePlugin {
 			TestMediator.initDependencyTrees();
 			
 			List<String> excludedTests = TestMediator.getExcludedTests();
-			excludedTests.addAll(getExcludes());
+			if (null != getExcludes()) {
+				excludedTests.addAll(getExcludes());
+			}
 		 	setExcludes(excludedTests);
+		 	
 			super.execute();
 			
 		} catch (NoSuchAlgorithmException | IOException e) {
